@@ -18,8 +18,8 @@ SCREEN_HEIGHT = 600
 SPEED = 5
 SCORE = 0
 
-font = pygame.font.SysFont("Aidos", 60)
-font_small = pygame.font.SysFont("Aidos", 20)
+font = pygame.font.SysFont("Verdana", 60)
+font_small = pygame.font.SysFont("Verdana", 20)
 game_over = font.render("Game Over", True, BLACK)
 
 background = pygame.image.load("C:/Users/Admin/pyimages/road.jpg")
