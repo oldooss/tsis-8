@@ -10,13 +10,15 @@ black = (0, 0, 0)
 width = 800
 height = 600
 screen = pygame.display.set_mode((width, height))
-name_of_game = pygame.display.set_caption("Snake")
+pygame.display.set_caption("Snake")
 clock = pygame.time.Clock()
-font = pygame.font.SysFont("Verdana", 25)
 
 snake_size = 20
 
-def current_level(level):
+font = pygame.font.SysFont("Verdana", 20)
+
+
+def curr_level(level):
     level_str = font.render("Level:" + str(level), True, white)
     screen.blit(level_str, (700, 10))
 
@@ -44,12 +46,9 @@ def GameStart():
 
     level = 0
     point = 0
-    screen.fill(black)
-    current_level(level)
-    curr_point(point)
 
-    coor_food_x = round(random.randrange(0, width - snake_size) / 20.0) * 20.0
-    coor_food_y = round(random.randrange(0, height - snake_size) / 20.0) * 20.0
+    foodx = round(random.randrange(0, width - snake_size) / 20.0) * 20.0
+    foody = round(random.randrange(0, height - snake_size) / 20.0) * 20.0
 
     while not game_over:
         for event in pygame.event.get():
@@ -72,11 +71,15 @@ def GameStart():
         if x1 >= width or x1 < 0 or y1 >= height or y1 < 0:
             game_over = True
 
+        screen.fill(black)
+
+        curr_level(level)
+        curr_point(point)
+
         x1 += x1_change
         y1 += y1_change
 
-        pygame.draw.rect(screen, white, [coor_food_x, coor_food_y, snake_size, snake_size])
-
+        pygame.draw.rect(screen, white, [foodx, foody, snake_size, snake_size])
 
         snake_Head = []
         snake_Head.append(x1)
@@ -90,11 +93,12 @@ def GameStart():
             if x == snake_Head:
                 game_over = True
         Main_snake(snake_size, snake_List)
-
         pygame.display.update()
-        if x1 == coor_food_x and y1 == coor_food_y:
-            coor_food_x = round(random.randrange(0, width - snake_size) / 20.0) * 20.0
-            coor_food_y = round(random.randrange(0, height - snake_size) / 20.0) * 20.0
+
+
+        if x1 == foodx and y1 == foody:
+            foodx = round(random.randrange(0, width - snake_size) / 20.0) * 20.0
+            foody = round(random.randrange(0, height - snake_size) / 20.0) * 20.0
             Length_of_snake += 1
             point += 1
             if point % 5 == 0:
@@ -105,4 +109,3 @@ def GameStart():
 
 
 GameStart()
-
